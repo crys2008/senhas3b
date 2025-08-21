@@ -76,12 +76,14 @@ function classificaSenha(tamanhoAlfabeto){
 const botaoCopiar = document.querySelector('#copiar-senha');
 
 botaoCopiar.onclick = function() {
-    campoSenha.select();
-    campoSenha.setSelectionRange(0, 99999); // Para mobile
-    document.execCommand('copy');
-
-    botaoCopiar.textContent = "Copiado!";
-    setTimeout(() => {
-        botaoCopiar.textContent = "Copiar";
-    }, 2000);
+    navigator.clipboard.writeText(campoSenha.value)
+        .then(() => {
+            botaoCopiar.textContent = "Copiado!";
+            setTimeout(() => {
+                botaoCopiar.textContent = "Copiar";
+            }, 2000);
+        })
+        .catch(() => {
+            alert("Erro ao copiar a senha");
+        });
 }

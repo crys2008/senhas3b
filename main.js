@@ -87,3 +87,24 @@ botaoCopiar.onclick = function() {
             alert("Erro ao copiar a senha");
         });
 }
+
+
+const botaoCopiar = document.querySelector('#copiar-senha');
+
+botaoCopiar.addEventListener("click", () => {
+    const senha = campoSenha.value;
+
+    if (!senha) {
+        alert("Nenhuma senha gerada ainda!");
+        return;
+    }
+
+    navigator.clipboard.writeText(senha).then(() => {
+        botaoCopiar.textContent = "Copiado!";
+        setTimeout(() => {
+            botaoCopiar.textContent = "Copiar";
+        }, 2000);
+    }).catch(err => {
+        console.error("Erro ao copiar:", err);
+    });
+});
